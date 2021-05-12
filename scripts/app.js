@@ -21,25 +21,35 @@
 new Vue({
     el: "#app",
     data: {
-        albumList:[],
-        filteredData:[],
+        albumList: [],
+        filteredData: [],
+        generesList: [],
+
     },
     methods: {
-        getGeneresList(){
-            const finalList = []
-
-            albumList.forEach((element)=>{
-                if(finalList.includes(element.genre)){
-                    finalList.push(element.genre)
+        getGeneresList() {
+            this.generesList = [];
+            this.albumList.forEach((element) => {
+                if (!this.generesList.includes(element.genre)) {
+                    this.generesList.push(element.genre);
                 }
-        })
-
+            });
         },
-        onSelectChange(event){
-            const select = event.currentTarget
-            // select.value
-            // this.filteredData = 
-        }
+
+        // come cambio questa funzione in una computed? 
+        
+        onSelectChange(event) {
+            if (!event || !event.currentTarget.value) {
+                this.filteredData = this.albumList;
+                return;
+            }
+            const select = event.currentTarget;
+            select.value;
+            this.filteredData = this.albumList.filter(album => album.genre === select.value);
+        },
+        sortedYears() {
+            this.albumList.sort(function (oggettoA, oggettoB) { return oggettoB.year - oggettoA.year; });
+        },
     },
     mounted() {
         /*
@@ -47,21 +57,16 @@ new Vue({
         */
         axios
             .get("https://flynn.boolean.careers/exercises/api/array/music")
-            .then((resp) => {
-                //array di oggetti con le seguenti chiavi
-                // "poster": 
-                // "title": 
-                // "author": 
-                // "genre": 
-                // "year": 
-                const albumList = resp.data.response;
-                this.albumArrays.push(resp.data.response)
-                this.filteredData.push(resp.data.response.genre)
-                /*
-                una volta ricevuti i dati dal server posso prima ancora di salvarli nella variabile di Vue posso eseguire il sort in modo da salvare poi i dati già ordinati
-                */
+            .then(resp => {
+                this.albumList.push(...resp.data.response);
+                this.getGeneresList();
+                this.onSelectChange();
+                this.sortedYears();
             });
 
-        
-    },
+
+        /*
+        una volta ricevuti i dati dal server posso prima ancora di salvarli nella variabile di Vue posso eseguire il sort in modo da salvare poi i dati già ordinati
+        */
+    }
 });

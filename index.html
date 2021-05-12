@@ -40,23 +40,29 @@
                     -sulla select posso usare un addeventlistener @change per capire il nuovo valore
                     - all'interno della funzione eseguo il filter sui dati e li salvo in una nuova variabile (filteredData )
             -->
-            <select name="" id="" @change="onSelectchange"></select>
+            
+            <select name="" id="" @change="onSelectChange"> 
+                <option value="">Tutti i generi</option>
+                <option v-for="element in generesList">
+                    {{element}}
+                </option>
+            </select>
         </h1>
 
         <div class="albums-container">
-            <div class="loading" v-if="albumArrays.length === 0">loading albums</div>
-            <div v-else="albumList.length >= 1" class="album" v-for="element in albumArrays">
+            <div class="loading" v-if="albumList.length === 0">loading albums</div>
+            <div v-else="albumList.length >= 1" class="album" v-for="element in filteredData">
                 <!-- copertina -->
-                <img src="">
+                <img :src="element.poster">
 
                 <!-- il titolo album -->
-                <h3>Titolo Album</h3>
+                <h3>{{element.title}}</h3>
 
                 <!-- nome artista -->
-                <h4>Nome artista</h4>
+                <h4>{{element.author}}</h4>
 
                 <!-- anno album -->
-                <small>2021</small>
+                <small>{{element.year}}</small>
             </div>
             
         </div>
