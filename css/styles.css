@@ -6,6 +6,8 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  background-color: rgb(206, 197, 197);
 }
 
 #app{
@@ -30,6 +32,17 @@ body {
   text-align: center;
 }
 
+.album-choose{
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+.album-choose:hover{
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+
 .album img {
   max-height: 150px;
   max-width: 150px;
@@ -37,3 +50,18 @@ body {
   object-fit: cover;
   box-shadow: 0 0 10px rgba(0,0,0, .4);
 }
+
+.bigger-container{
+  width: 1445px;
+  background-color: rgb(58, 51, 51);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.bigger-container h1{
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+

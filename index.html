@@ -25,48 +25,56 @@
                 -nell'html dovremo avere la copertina per ogni album . poi il titolo album anno e se vogliamo l'artista 
     -->
     <div id="app">
-        <h1>My albums
-            <!-- Creare una select con tutti i generi dei dischi. In base a cosa scegliamo nella select, vedremo i corrispondenti cd
-                -dobbiamo creare le option della select
-                -prima recuperare i generi dei dischi disponibili
-                    -usando il .map creiamo un nuovo Array con solo la lista dei generi
-                    -i generi si potrebbero ripetere all'interno dell'array
-                        -devo tenere solo una voce per genere
-                        -
-                -questi generi li slavo in un array
-                    -in html li stampo con un v-for
-                        -ogni genere quindi sarà una option all'interno della select
-                -al cambio della select, filtriamo i dischi in base al genere scelto
-                    -sulla select posso usare un addeventlistener @change per capire il nuovo valore
-                    - all'interno della funzione eseguo il filter sui dati e li salvo in una nuova variabile (filteredData )
-            -->
-            
-            <select name="" id="" @change="onSelectChange"> 
-                <option value="">Tutti i generi</option>
-                <option v-for="element in generesList">
-                    {{element}}
-                </option>
-            </select>
-        </h1>
+        <div class="bigger-container">
+            <h1>My albums
+                <!-- Creare una select con tutti i generi dei dischi. In base a cosa scegliamo nella select, vedremo i corrispondenti cd
+                    -dobbiamo creare le option della select
+                    -prima recuperare i generi dei dischi disponibili
+                        -usando il .map creiamo un nuovo Array con solo la lista dei generi
+                        -i generi si potrebbero ripetere all'interno dell'array
+                            -devo tenere solo una voce per genere
+                            -
+                    -questi generi li slavo in un array
+                        -in html li stampo con un v-for
+                            -ogni genere quindi sarà una option all'interno della select
+                    -al cambio della select, filtriamo i dischi in base al genere scelto
+                        -sulla select posso usare un addeventlistener @change per capire il nuovo valore
+                        - all'interno della funzione eseguo il filter sui dati e li salvo in una nuova variabile (filteredData )
+                -->
+                <div class="select">
+                    <select name="" id="standard-select" @change="onSelectChange"> 
+                        <option value="">Tutti i generi</option>
+                        <option v-for="element in generesList">
+                            {{element}}
+                        </option>
+                    </select>
+                </div>
 
-        <div class="albums-container">
-            <div class="loading" v-if="albumList.length === 0">loading albums</div>
-            <div v-else="albumList.length >= 1" class="album" v-for="element in filteredData">
-                <!-- copertina -->
-                <img :src="element.poster">
+            </h1>
+    
+            <div class="albums-container">
+                <div class="loading" v-if="albumList.length === 0">loading albums</div>
+                <div v-else="albumList.length >= 1" class="album" id="grayscale" v-for="element in filteredData">
+                    <div class="album-choose">
+                        <!-- copertina -->
+                        <img :src="element.poster">
+                    </div>
+        
+                        <!-- il titolo album -->
+                        <h3>{{element.title}}</h3>
+        
+                        <!-- nome artista -->
+                        <h4>{{element.author}}</h4>
+        
+                        <!-- anno album -->
+                        <small>{{element.year}}</small>
 
-                <!-- il titolo album -->
-                <h3>{{element.title}}</h3>
-
-                <!-- nome artista -->
-                <h4>{{element.author}}</h4>
-
-                <!-- anno album -->
-                <small>{{element.year}}</small>
+                </div>
+                
             </div>
-            
         </div>
 
+            
 
     </div>
     <script src="scripts/app.js"></script>
