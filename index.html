@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Music Discs</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- 
+        gli album sono contenuti in un array di vue e quindi servirà un ciclo for elements in albumsArray
+        -se array è vuoto? 
+            -è vuoto all'avvio di vue finché la chiamata di ajax non sarà completata
+            -dobbiamo in qualche modo l'utente che i dati sono in caricamento
+                -potremmo mostrare un messaggio di loading con un v-if , se array è vuoto -> mostro attendi, altrimenti lista album
+        album -> in un array di vue
+        v-for -> 
+            all'interno dovrò scrivere dell'html per ogni album
+                -nell'html dovremo avere la copertina per ogni album . poi il titolo album anno e se vogliamo l'artista 
+    -->
+    <div id="app">
+        <h1>My albums
+            <!-- Creare una select con tutti i generi dei dischi. In base a cosa scegliamo nella select, vedremo i corrispondenti cd
+                -dobbiamo creare le option della select
+                -prima recuperare i generi dei dischi disponibili
+                    -usando il .map creiamo un nuovo Array con solo la lista dei generi
+                    -i generi si potrebbero ripetere all'interno dell'array
+                        -devo tenere solo una voce per genere
+                        -
+                -questi generi li slavo in un array
+                    -in html li stampo con un v-for
+                        -ogni genere quindi sarà una option all'interno della select
+                -al cambio della select, filtriamo i dischi in base al genere scelto
+                    -sulla select posso usare un addeventlistener @change per capire il nuovo valore
+                    - all'interno della funzione eseguo il filter sui dati e li salvo in una nuova variabile (filteredData )
+            -->
+            <select name="" id="" @change="onSelectchange"></select>
+        </h1>
+
+        <div class="albums-container">
+            <div class="loading" v-if="albumArrays.length === 0">loading albums</div>
+            <div v-else="albumList.length >= 1" class="album" v-for="element in albumArrays">
+                <!-- copertina -->
+                <img src="">
+
+                <!-- il titolo album -->
+                <h3>Titolo Album</h3>
+
+                <!-- nome artista -->
+                <h4>Nome artista</h4>
+
+                <!-- anno album -->
+                <small>2021</small>
+            </div>
+            
+        </div>
+
+
+    </div>
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
